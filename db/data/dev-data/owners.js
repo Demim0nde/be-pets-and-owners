@@ -38,6 +38,14 @@ module.exports = [
     {
         name: "Sabrina",
         age: 25
+    },
+    {
+        name: "Arnie",
+        age: 77
+    },
+    {
+        name: "Timothée",
+        age: 29
     }
 
 ]
