@@ -5,7 +5,7 @@ module.exports = [
     favouriteFood: "Chocolate",
     owner: 1,
     age: 12,
-    temperament: "passive"
+    temperament: "grumpy"
   },
   {
     name: "Pet 2",
@@ -29,7 +29,7 @@ module.exports = [
     favouriteFood: "Biscuits",
     owner: 1,
     age: 10,
-    temperament: "aggressive"
+    temperament: "grumpy"
   },
   {
     name: "Pet 5",
@@ -37,6 +37,14 @@ module.exports = [
     favouriteFood: "Fish",
     owner: 3,
     age: 8,
+    temperament: "happy"
+  },
+  {
+    name: "Pet 6",
+    avatarUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmKSw4qy2bk_0mjrt9miN8YV3WVX5IyVuA0g&s",
+    favouriteFood: "Malt Loaf",
+    owner: 3,
+    age: 2,
     temperament: "happy"
   }
 ];
