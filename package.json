@@ -4,7 +4,9 @@
   "description": "To get your tasks head to:  https://l2c.northcoders.com/courses/be/pets-and-owners",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "seed-dev": "node db/seeding/run-seed.js",
+    "setup-dbs": "psql -f db/setup-dbs.sql" 
   },
   "repository": {
     "type": "git",
