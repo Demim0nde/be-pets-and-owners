@@ -6,7 +6,6 @@ const db = require("./db/connection");
 app.get("/api/owners/:id", async (request, response) => {
   try {
     const ownerId = Object.values(request.params);
-    console.log(request.params);
     const { rows } = await db.query(
       `SELECT * FROM owners WHERE owner_id = $1`,
       ownerId
