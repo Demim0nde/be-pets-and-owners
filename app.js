@@ -17,5 +17,15 @@ app.get("/api/owners/:id", async (request, response) => {
   }
 });
 
+app.get("/api/owners", async (request, response) => {
+  try {
+    const { rows } = await db.query(`SELECT * FROM owners`);
+    response.status(200).send(rows);
+  } catch (err) {
+    response.status(500).send(err);
+    console.log(err);
+  }
+});
+
 // Listen
 module.exports = { app };
