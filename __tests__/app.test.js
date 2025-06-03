@@ -15,7 +15,7 @@ afterAll(() => {
 });
 
 describe("GET API Testing /owners", () => {
-  test("GET - 200: /api/owners/:id", () => {
+  test("GET - 200: /api/owners/:id - returns the single owner at parametric endpoint", () => {
     return request(app)
       .get("/api/owners/3")
       .expect(200)
@@ -26,11 +26,12 @@ describe("GET API Testing /owners", () => {
         expect(typeof age).toBe("number");
       });
   });
-  test("GET - 200: /api/owners", () => {
+  test("GET - 200: /api/owners - returns array of all owners", () => {
     return request(app)
       .get("/api/owners")
       .expect(200)
       .then(({ body }) => {
+        expect(Array.isArray(body)).toBe(true);
         expect(body.length).toBeGreaterThan(0);
         body.forEach((element) => {
           const { owner_id, name, age } = element;
