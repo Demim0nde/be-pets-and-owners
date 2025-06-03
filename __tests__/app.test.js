@@ -40,9 +40,9 @@ describe("GET API Testing /owners", () => {
         });
       });
   });
-  test("GET - 200: /api/owners/:id/pets - returns array of all pets for owner at parametric endpoint", () => {
+  test("GET - 200: /api/owners/:id/pets - returns array of all pets for owner at parametric endpoint where owner exists", () => {
     return request(app)
-      .get("/api/owners/:id/pets")
+      .get("/api/owners/2/pets")
       .then(({ body }) => {
         expect(Array.isArray(body)).toBe(true);
         if (body.length > 0) {
@@ -51,16 +51,46 @@ describe("GET API Testing /owners", () => {
             const {
               pet_id,
               name,
-              avatarUrl,
-              favouriteFood,
+              avatar_url,
+              fave_food,
               owner,
               age,
               temperament,
             } = element;
             expect(typeof pet_id).toBe("number");
             expect(typeof name).toBe("string");
-            expect(typeof avatarUrl).toBe("string");
-            expect(typeof favouriteFood).toBe("string");
+            expect(typeof avatar_url).toBe("string");
+            expect(typeof fave_food).toBe("string");
+            expect(typeof owner).toBe("number");
+            expect(typeof age).toBe("number");
+            expect(typeof temperament).toBe("string");
+          });
+        } else {
+          expect(404);
+        }
+      });
+  });
+  test("GET - 404: /api/owners/:id/pets - returns 'error 404' for owner at parametric endpoint where owner does not exists", () => {
+    return request(app)
+      .get("/api/owners/202/pets")
+      .then(({ body }) => {
+        expect(Array.isArray(body)).toBe(true);
+        if (body.length > 0) {
+          expect(200);
+          body.forEach((element) => {
+            const {
+              pet_id,
+              name,
+              avatar_url,
+              fave_food,
+              owner,
+              age,
+              temperament,
+            } = element;
+            expect(typeof pet_id).toBe("number");
+            expect(typeof name).toBe("string");
+            expect(typeof avatar_url).toBe("string");
+            expect(typeof fave_food).toBe("string");
             expect(typeof owner).toBe("number");
             expect(typeof age).toBe("number");
             expect(typeof temperament).toBe("string");
