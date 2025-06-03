@@ -101,3 +101,36 @@ describe("GET API Testing /owners", () => {
       });
   });
 });
+
+describe("GET API Testing /pets", () => {
+  test("GET - 200: /api/pets - returns an array of all pets", () => {
+    return request(app)
+      .get("/api/pets")
+      .then(({ body }) => {
+        expect(Array.isArray(body)).toBe(true);
+        if (body.length > 0) {
+          expect(200);
+          body.forEach((element) => {
+            const {
+              pet_id,
+              name,
+              avatar_url,
+              fave_food,
+              owner,
+              age,
+              temperament,
+            } = element;
+            expect(typeof pet_id).toBe("number");
+            expect(typeof name).toBe("string");
+            expect(typeof avatar_url).toBe("string");
+            expect(typeof fave_food).toBe("string");
+            expect(typeof owner).toBe("number");
+            expect(typeof age).toBe("number");
+            expect(typeof temperament).toBe("string");
+          });
+        } else {
+          expect(404);
+        }
+      });
+  });
+});
