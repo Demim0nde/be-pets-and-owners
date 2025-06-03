@@ -40,4 +40,30 @@ describe("GET API Testing /owners", () => {
         });
       });
   });
+  test("GET - 200: /api/owners/:id/pets - returns an array of all pets of given owner", () => {
+    return request(app)
+      .get("/api/owners/3/pets")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.length).not.toBe(0);
+        body.forEach((pet) => {
+          const {
+            pet_id,
+            name,
+            avatar_url,
+            fave_food,
+            owner,
+            age,
+            temperament,
+          } = pet;
+          expect(typeof pet_id).toBe("number");
+          expect(typeof name).toBe("string");
+          expect(typeof avatar_url).toBe("string");
+          expect(typeof fave_food).toBe("string");
+          expect(typeof owner).toBe("number");
+          expect(typeof age).toBe("number");
+          expect(typeof temperament).toBe("string");
+        });
+      });
+  });
 });

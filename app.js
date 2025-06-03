@@ -22,5 +22,18 @@ app.get("/api/owners{/:id}", async (request, response) => {
   }
 });
 
+app.get("/api/owners/:id/pets", (req, res) => {
+  const ownerId = Object.values(req.params);
+  return db
+    .query(
+      `SELECT * FROM pets JOIN owners ON pets.owner = owners.owner_id WHERE owner_id = $1`,
+      ownerId
+    )
+    .then(({ rows }) => {
+      res.status(200).send(rows);
+    })
+    .catch((err) => console.log(err));
+});
+
 // Listen
 module.exports = { app };
