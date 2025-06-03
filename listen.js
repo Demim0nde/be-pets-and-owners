@@ -1,6 +1,6 @@
 const { app } = require("./app");
 
-app.listen(9999, () => {
+app.listen(9999, (err) => {
   if (err) {
     console.log(err);
   } else {
