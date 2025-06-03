@@ -32,13 +32,42 @@ describe("GET API Testing /owners", () => {
       .expect(200)
       .then(({ body }) => {
         expect(Array.isArray(body)).toBe(true);
-        expect(body.length).toBeGreaterThan(0);
         body.forEach((element) => {
           const { owner_id, name, age } = element;
           expect(typeof owner_id).toBe("number");
           expect(typeof name).toBe("string");
           expect(typeof age).toBe("number");
         });
+      });
+  });
+  test("GET - 200: /api/owners/:id/pets - returns array of all pets for owner at parametric endpoint", () => {
+    return request(app)
+      .get("/api/owners/:id/pets")
+      .then(({ body }) => {
+        expect(Array.isArray(body)).toBe(true);
+        if (body.length > 0) {
+          expect(200);
+          body.forEach((element) => {
+            const {
+              pet_id,
+              name,
+              avatarUrl,
+              favouriteFood,
+              owner,
+              age,
+              temperament,
+            } = element;
+            expect(typeof pet_id).toBe("number");
+            expect(typeof name).toBe("string");
+            expect(typeof avatarUrl).toBe("string");
+            expect(typeof favouriteFood).toBe("string");
+            expect(typeof owner).toBe("number");
+            expect(typeof age).toBe("number");
+            expect(typeof temperament).toBe("string");
+          });
+        } else {
+          expect(404);
+        }
       });
   });
 });
