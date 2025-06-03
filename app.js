@@ -5,16 +5,10 @@ const db = require("./db/connection");
 // Server
 app.get("/api/owners{/:id}", async (request, response) => {
   try {
-    const [ownerId] = Object.values(request.params);
-    let result = {};
-    if (!!ownerId) {
-      result = await db.query(`SELECT * FROM owners WHERE owner_id = $1`, [
-        ownerId,
-      ]);
-    } else {
-      result = await db.query(`SELECT * FROM owners`);
-    }
-    const { rows } = result;
+    const ownerId = Object.values(request.params);
+    const { rows } = ownerId[0]
+      ? await db.query(`SELECT * FROM owners WHERE owner_id = $1`, ownerId)
+      : await db.query(`SELECT * FROM owners`);
     if (rows.length > 1) {
       response.status(200).send(rows);
     } else if (rows.length > 0) {
